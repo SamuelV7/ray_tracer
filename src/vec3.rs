@@ -7,7 +7,7 @@ pub struct Vec3{
     y : f64,
     z : f64
 }
-
+impl_op!()
 impl ops::Add for Vec3 {
     type Output = Vec3;
 
