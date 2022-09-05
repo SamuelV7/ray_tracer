@@ -8,14 +8,6 @@ pub struct Vec3{
     z : f64
 }
 
-impl_op_ex!(+ |lhs: Vec3, rhs: Vec3| {
-    Vec3{
-        x: lhs.x + rhs.x,
-        y: lhs.y + rhs.y,
-        z: lhs.x + rhs.z
-    }
-});
-
 impl ops::Add for Vec3 {
     type Output = Vec3;
 
