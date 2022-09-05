@@ -1,4 +1,3 @@
-
 mod ray;
 mod vec3;
 mod images_gen;
