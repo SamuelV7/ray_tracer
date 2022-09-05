@@ -32,7 +32,7 @@ impl_op_commutative!(/ |v : Vec3, t : f64 | -> Vec3{
 
 impl Vec3{
     fn new(x: f64, y: f64, z:f64) -> Vec3{
-        Vec3{x: x, y:y, z:z}
+        Vec3{x, y, z}
     }
     fn length_squared(self) -> f64 {
         self.x*self.x + self.y*self.y + self.z*self.z
