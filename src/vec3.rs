@@ -1,9 +1,10 @@
 // use std::intrinsics::sqrtf64;
 use auto_ops::*;
+#[derive(Clone, Copy)]
 pub struct Vec3{
-    x: f64,
-    y : f64,
-    z : f64
+    pub x: f64,
+    pub y : f64,
+    pub z : f64
 }
 
 impl_op_ex!(+ |lhs :Vec3, rhs : Vec3| -> Vec3 { 
@@ -31,30 +32,33 @@ impl_op_commutative!(/ |v : Vec3, t : f64 | -> Vec3{
 });
 
 impl Vec3{
-    fn new(x: f64, y: f64, z:f64) -> Vec3{
+    pub fn new(x: f64, y: f64, z:f64) -> Vec3{
         Vec3{x, y, z}
     }
-    fn length_squared(self) -> f64 {
+    pub fn length_squared(self) -> f64 {
         self.x*self.x + self.y*self.y + self.z*self.z
     }
-    fn length(self) -> f64{
+    pub fn length(self) -> f64{
         f64::sqrt(self.length_squared())
     }
-    fn scale(self, scalar_value :f64) -> Vec3{
+    pub fn scale(self, scalar_value :f64) -> Vec3{
         Vec3{
             x: self.x * scalar_value,
             y: self.y * scalar_value,
             z: self.z * scalar_value
         }
     }
-    fn dot(vec1 : Vec3, vec2 : Vec3) -> f64{
+    pub fn dot(vec1 : Vec3, vec2 : Vec3) -> f64{
         (vec1.x * vec2.x) + (vec1.y * vec2.y) + (vec1.z + vec2.z)
     }
-    fn cross(vec1 : Vec3, vec2 : Vec3) -> Vec3{
+    pub fn cross(vec1 : Vec3, vec2 : Vec3) -> Vec3{
         Vec3{
             x: vec1.y * vec2.z - vec1.z * vec2.y,
             y: vec1.z * vec2.x - vec1.x * vec2.z,
             z: vec1.x * vec2.y - vec1.y * vec2.z
         }
     }
+}
+pub fn unit_vector(v : Vec3) -> Vec3 {
+    v / v.length()
 }
