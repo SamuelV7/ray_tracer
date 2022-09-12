@@ -10,7 +10,7 @@ type RGB = Vec3;
 
 pub fn ppm_to_png(file_path : String){
     let path = image::open(file_path).expect("file not found");
-    path.save("./src/image.png").expect("Failure to save as png");
+    path.save("./src/temp_buf.png").expect("Failure to save as png");
 }
 
 pub fn save_ppm(file : String, data : Vec<Vec3>, img : Image){
@@ -42,5 +42,5 @@ pub fn make_ppm(){
             rgb_vec.push(to_write);
         }
     }
-    save_ppm("./src/image.ppm".to_string(), rgb_vec, img);
+    save_ppm("./src/test.ppm".to_string(), rgb_vec, img);
 }

@@ -19,7 +19,7 @@ fn ray_color(r : ray::Ray) -> Color{
 
 
 fn main() {
-    // images_gen::make_ppm();
+    images_gen::make_ppm();
 
     // Image 
     let aspect_ratio = 16.0/9.0;
@@ -48,6 +48,6 @@ fn main() {
             rgb_to_save.push(pixel_color* 255.999);
         } 
     }
-    save_ppm("./src/image.ppm".to_string(), rgb_to_save, Image{ width: image_width, height: image_height as u32 });
+    // save_ppm("./src/image.ppm".to_string(), rgb_to_save, Image{ width: image_width, height: image_height as u32 });
     println!("Hello, world!");
 }
