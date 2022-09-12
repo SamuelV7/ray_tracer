@@ -40,12 +40,12 @@ fn main() {
     // render
     for j in (0..image_height).rev(){
         for i in 0..image_width{
-            let u = (i as f64) / (((image_width as f64)- 1.0) as f64);
-            let v = (j as f64) / (((image_height as f64)- 1.0) as f64);
+            let u = i as f64 / ((image_width- 1) as f64);
+            let v = j as f64 / ((image_height- 1) as f64);
             let ray_dir_input = lower_left_corner + u*horizontal + v*horizontal - origin;
             let ray = ray::Ray::new(origin, ray_dir_input);
             let pixel_color = ray_color(ray);
-            rgb_to_save.push(pixel_color);
+            rgb_to_save.push(pixel_color* 255.999);
         } 
     }
     save_ppm("./src/image.ppm".to_string(), rgb_to_save, Image{ width: image_width, height: image_height as u32 });
