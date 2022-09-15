@@ -39,7 +39,8 @@ impl Vec3{
         self.x*self.x + self.y*self.y + self.z*self.z
     }
     pub fn length(self) -> f64{
-        f64::sqrt(self.length_squared())
+        let length_sqr = self.length_squared();
+        f64::sqrt(length_sqr)
     }
     pub fn scale(self, scalar_value :f64) -> Vec3{
         Vec3{
@@ -60,5 +61,5 @@ impl Vec3{
     }
 }
 pub fn unit_vector(v : Vec3) -> Vec3 {
-    v / v.length()
+    (v / v.length())
 }

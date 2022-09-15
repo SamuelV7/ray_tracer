@@ -1,7 +1,7 @@
 mod ray;
 mod vec3;
 mod images_gen;
-
+mod sphere;
 use vec3::Vec3;
 
 use crate::images_gen::{save_ppm, Image};
@@ -9,8 +9,15 @@ use crate::images_gen::{save_ppm, Image};
 type Color = vec3::Vec3;
 type Point3 = vec3::Vec3;
 
-
+// fn write_color(pixel_color : Vec<Color>) -> Vec<Color> {
+//     let colors_save : Color = pixel_color.into_iter().map(|item| {
+//         Color{ x: item.x*255.999, y: item.y*255.999, z:item.z*255.999}
+//     }).collect();
+// }
 fn ray_color(r : ray::Ray) -> Color{
+    if sphere::hit_sphere(Point3 { x: 0.0, y: 0.0, z: -1.0 }, 0.5, r) {
+        return Color::new(1.0,0.0,0.0)
+    }
     let unit_direction = vec3::unit_vector(r.dir);
     let t = 0.5*(unit_direction.y + 1.0);
     let color = Color::new(1.0, 1.0, 1.0);
@@ -42,12 +49,13 @@ fn main() {
         for i in 0..image_width{
             let u = i as f64 / ((image_width- 1) as f64);
             let v = j as f64 / ((image_height- 1) as f64);
-            let ray_dir_input = lower_left_corner + u*horizontal + v*horizontal - origin;
+            let ray_dir_input = lower_left_corner + u*horizontal + v*vertical - origin;
             let ray = ray::Ray::new(origin, ray_dir_input);
             let pixel_color = ray_color(ray);
             rgb_to_save.push(pixel_color* 255.999);
+            // println!("j:{j} i:{i}, u:{u}, v:{v}")
         } 
     }
-    // save_ppm("./src/image.ppm".to_string(), rgb_to_save, Image{ width: image_width, height: image_height as u32 });
-    println!("Hello, world!");
+    save_ppm("./src/image.ppm".to_string(), rgb_to_save, Image{ width: image_width, height: image_height as u32 });
+    println!("Saved File");
 }

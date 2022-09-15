@@ -14,15 +14,15 @@ pub fn ppm_to_png(file_path : String){
 }
 
 pub fn save_ppm(file : String, data : Vec<Vec3>, img : Image){
-    let mut start_of_file = vec!["P3".to_string(), img.height.to_string()+" "+
-        &img.width.to_string(), (img.width-1).to_string()];
+    let mut start_of_file = vec!["P3".to_string(), img.width.to_string()+" "+
+        &img.height.to_string(), (img.width-1).to_string()];
     data.into_iter().for_each(|elem| {
         let text = format!("{} {} {}", elem.x as i32, elem.y as i32, elem.z as i32);
         start_of_file.push(text);
     });
     let to_write: Vec<String> = start_of_file.into_iter().map(|pixel| pixel+"\n").collect();
     fs::write(file.clone(), to_write.join("").as_bytes()).expect("");
-    ppm_to_png(file);
+    // ppm_to_png(file);
 }
 
 // pub fn save_default(data: Vec3, img : Image){
